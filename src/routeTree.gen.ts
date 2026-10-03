@@ -10,33 +10,142 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as TrilhasRouteImport } from './routes/trilhas'
+import { Route as AulaIdRouteImport } from './routes/aula.$id'
+import { Route as FerramentasIndexRouteImport } from './routes/ferramentas.index'
+import { Route as FerramentasComparadorRouteImport } from './routes/ferramentas.comparador'
+import { Route as FerramentasIndependenciaRouteImport } from './routes/ferramentas.independencia'
+import { Route as FerramentasJurosRouteImport } from './routes/ferramentas.juros'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrilhasRoute = TrilhasRouteImport.update({
+  id: '/trilhas',
+  path: '/trilhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AulaIdRoute = AulaIdRouteImport.update({
+  id: '/aula/$id',
+  path: '/aula/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FerramentasIndexRoute = FerramentasIndexRouteImport.update({
+  id: '/ferramentas/',
+  path: '/ferramentas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FerramentasComparadorRoute = FerramentasComparadorRouteImport.update({
+  id: '/ferramentas/comparador',
+  path: '/ferramentas/comparador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FerramentasIndependenciaRoute =
+  FerramentasIndependenciaRouteImport.update({
+    id: '/ferramentas/independencia',
+    path: '/ferramentas/independencia',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FerramentasJurosRoute = FerramentasJurosRouteImport.update({
+  id: '/ferramentas/juros',
+  path: '/ferramentas/juros',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/perfil': typeof PerfilRoute
+  '/trilhas': typeof TrilhasRoute
+  '/aula/$id': typeof AulaIdRoute
+  '/ferramentas/comparador': typeof FerramentasComparadorRoute
+  '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
+  '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas/': typeof FerramentasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/perfil': typeof PerfilRoute
+  '/trilhas': typeof TrilhasRoute
+  '/aula/$id': typeof AulaIdRoute
+  '/ferramentas/comparador': typeof FerramentasComparadorRoute
+  '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
+  '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas': typeof FerramentasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRoute
+  '/perfil': typeof PerfilRoute
+  '/trilhas': typeof TrilhasRoute
+  '/aula/$id': typeof AulaIdRoute
+  '/ferramentas/comparador': typeof FerramentasComparadorRoute
+  '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
+  '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas/': typeof FerramentasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/perfil'
+    | '/trilhas'
+    | '/aula/$id'
+    | '/ferramentas/comparador'
+    | '/ferramentas/independencia'
+    | '/ferramentas/juros'
+    | '/ferramentas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app'
+    | '/perfil'
+    | '/trilhas'
+    | '/aula/$id'
+    | '/ferramentas/comparador'
+    | '/ferramentas/independencia'
+    | '/ferramentas/juros'
+    | '/ferramentas'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/perfil'
+    | '/trilhas'
+    | '/aula/$id'
+    | '/ferramentas/comparador'
+    | '/ferramentas/independencia'
+    | '/ferramentas/juros'
+    | '/ferramentas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRoute
+  PerfilRoute: typeof PerfilRoute
+  TrilhasRoute: typeof TrilhasRoute
+  AulaIdRoute: typeof AulaIdRoute
+  FerramentasComparadorRoute: typeof FerramentasComparadorRoute
+  FerramentasIndependenciaRoute: typeof FerramentasIndependenciaRoute
+  FerramentasJurosRoute: typeof FerramentasJurosRoute
+  FerramentasIndexRoute: typeof FerramentasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +157,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trilhas': {
+      id: '/trilhas'
+      path: '/trilhas'
+      fullPath: '/trilhas'
+      preLoaderRoute: typeof TrilhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aula/$id': {
+      id: '/aula/$id'
+      path: '/aula/$id'
+      fullPath: '/aula/$id'
+      preLoaderRoute: typeof AulaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas/': {
+      id: '/ferramentas/'
+      path: '/ferramentas'
+      fullPath: '/ferramentas/'
+      preLoaderRoute: typeof FerramentasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas/comparador': {
+      id: '/ferramentas/comparador'
+      path: '/ferramentas/comparador'
+      fullPath: '/ferramentas/comparador'
+      preLoaderRoute: typeof FerramentasComparadorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas/independencia': {
+      id: '/ferramentas/independencia'
+      path: '/ferramentas/independencia'
+      fullPath: '/ferramentas/independencia'
+      preLoaderRoute: typeof FerramentasIndependenciaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ferramentas/juros': {
+      id: '/ferramentas/juros'
+      path: '/ferramentas/juros'
+      fullPath: '/ferramentas/juros'
+      preLoaderRoute: typeof FerramentasJurosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRoute,
+  PerfilRoute: PerfilRoute,
+  TrilhasRoute: TrilhasRoute,
+  AulaIdRoute: AulaIdRoute,
+  FerramentasComparadorRoute: FerramentasComparadorRoute,
+  FerramentasIndependenciaRoute: FerramentasIndependenciaRoute,
+  FerramentasJurosRoute: FerramentasJurosRoute,
+  FerramentasIndexRoute: FerramentasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
