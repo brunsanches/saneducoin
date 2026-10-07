@@ -8,3 +8,8 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture
+- Lesson content, levels and glossary live in `src/data/lessons.ts`; edit content there, not in routes. Why: one source of truth for the trail.
+- Game progress (XP, streak, badges) lives in `src/lib/game.ts` as a localStorage store read via `useSyncExternalStore`. Why: no login yet; server snapshot avoids hydration mismatch.
+- App screens wrap in `AppShell` (mobile column + bottom nav). Why: consistent mobile-first chrome.
