@@ -27,7 +27,7 @@ export function useSimulatorReward(id: string, deps: unknown[]) {
       first.current = false;
       return;
     }
-    const gained = game.useSimulator(id);
+    const gained = game.rewardSimulator(id);
     if (gained) toast.success(`+${gained} XP por usar o simulador!`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);

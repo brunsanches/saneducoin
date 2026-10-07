@@ -63,7 +63,7 @@ export const game = {
     set({ ...state, completed: [...state.completed, id], xp: state.xp + XP.quiz });
     return XP.quiz;
   },
-  useSimulator(id: string) {
+  rewardSimulator(id: string) {
     load();
     if (state.simulators.includes(id)) return 0;
     set({ ...state, simulators: [...state.simulators, id], xp: state.xp + XP.simulator });
