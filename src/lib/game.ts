@@ -87,7 +87,7 @@ export function useGame() {
 
 export function isUnlocked(s: GameState, lessonId: string) {
   const i = LESSONS.findIndex((l) => l.id === lessonId);
-  return i <= 0 || s.completed.includes(LESSONS[i - 1].id);
+  return i <= 0 || s.completed.includes(LESSONS[i - 1]!.id);
 }
 
 export function nextLesson(s: GameState) {

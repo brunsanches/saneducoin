@@ -23,7 +23,7 @@ export function RichText({ text }: { text: string }) {
     <>
       {parts.map((p, i) => {
         const m = p.match(/^\[\[(.+)\]\]$/);
-        return m ? <Termo key={i} term={m[1]} /> : <span key={i}>{p}</span>;
+        return m ? <Termo key={i} term={m[1] ?? ""} /> : <span key={i}>{p}</span>;
       })}
     </>
   );

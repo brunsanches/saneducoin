@@ -39,7 +39,7 @@ function Dashboard() {
         </div>
         <Progress value={prog.pct} className="mt-3 h-4 bg-muted [&>div]:bg-primary" />
         <p className="mt-2 text-sm text-muted-foreground">
-          {lvl.id < 5 ? `Faltam ${prog.total - prog.done} aulas para o Nível ${lvl.id + 1} – ${LEVELS[lvl.id].name}` : "Último nível da jornada!"}
+          {lvl.id < 5 ? `Faltam ${prog.total - prog.done} aulas para o Nível ${lvl.id + 1} – ${LEVELS[lvl.id]?.name}` : "Último nível da jornada!"}
         </p>
       </section>
 

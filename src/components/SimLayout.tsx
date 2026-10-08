@@ -42,7 +42,7 @@ export function Field({
         <span className="font-bold text-muted-foreground">{label}</span>
         <span className="text-lg font-extrabold">{display}</span>
       </div>
-      <Slider value={[value]} min={min} max={max} step={step} onValueChange={(v) => onChange(v[0])} className="py-2" />
+      <Slider value={[value]} min={min} max={max} step={step} onValueChange={(v) => onChange(v[0] ?? value)} className="py-2" />
     </div>
   );
 }
