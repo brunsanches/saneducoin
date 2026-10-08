@@ -34,7 +34,7 @@ function Trilhas() {
               <p className="text-xl font-black">{lvl.emoji} {lvl.name}</p>
               <p className="text-sm opacity-90">{lvl.subtitle}</p>
             </div>
-            <div className="flex flex-col items-center gap-6 py-8">
+            <div className="flex flex-col items-center gap-12 py-10">
               {lessons.map((l) => {
                 const off = OFFSETS[idx++ % OFFSETS.length];
                 const done = s.completed.includes(l.id);
