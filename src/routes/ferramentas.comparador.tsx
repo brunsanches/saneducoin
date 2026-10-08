@@ -36,7 +36,7 @@ function Comparador() {
       const liq = (r: number) => { const b = valor * Math.pow(1 + r, k); return Math.round(b - (b - valor) * ir); };
       rows.push({ mes: k, Poupança: Math.round(valor * Math.pow(1 + rp, k)), "Tesouro Selic": liq(rs), "CDB 100% CDI": liq(rc) });
     }
-    return { data: rows, finais: rows[rows.length - 1] };
+    return { data: rows, finais: rows[rows.length - 1]! };
   }, [valor, meses, selic]);
 
   const items = [

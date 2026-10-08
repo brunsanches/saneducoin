@@ -37,7 +37,7 @@ function Juros() {
     }
     return rows;
   }, [inicial, mensal, anos, taxa]);
-  const last = data[data.length - 1];
+  const last = data[data.length - 1]!;
 
   return (
     <SimLayout id="juros" title="Juros compostos" intro="Os juros rendem sobre os juros. Mexa nos controles e veja a bola de neve.">
