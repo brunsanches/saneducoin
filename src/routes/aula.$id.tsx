@@ -16,7 +16,7 @@ export const Route = createFileRoute("/aula/$id")({
   head: ({ loaderData }) => {
     if (!loaderData) return { meta: [{ title: "Aula não encontrada — EduFin" }, { name: "robots", content: "noindex" }] };
     const t = `${loaderData.lesson.title} — EduFin`;
-    const d = loaderData.lesson.paragraphs[0].replace(/\[\[|\]\]/g, "").slice(0, 155);
+    const d = (loaderData.lesson.paragraphs[0] ?? "").replace(/\[\[|\]\]/g, "").slice(0, 155);
     return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }] };
   },
   component: Dojo,
