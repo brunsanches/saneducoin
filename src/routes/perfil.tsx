@@ -7,10 +7,12 @@ import { LESSONS } from "@/data/lessons";
 export const Route = createFileRoute("/perfil")({
   head: () => ({
     meta: [
-      { title: "Seu perfil — EduFin" },
+      { title: "Seu perfil: Educoin" },
       { name: "description", content: "Seu nível, XP, ofensiva e todas as conquistas da jornada financeira." },
-      { property: "og:title", content: "Seu perfil — EduFin" },
-      { property: "og:description", content: "Veja suas conquistas na EduFin." },
+      { property: "og:title", content: "Seu perfil: Educoin" },
+      { property: "og:description", content: "Veja suas conquistas na Educoin." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Perfil,
@@ -29,7 +31,7 @@ function Perfil() {
       <div className="bg-hero -mx-4 -mt-4 rounded-b-[2rem] px-6 pb-8 pt-10 text-center text-brand-foreground">
         <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-card text-5xl">{lvl.emoji}</div>
         <p className="mt-3 text-2xl font-black">Investidor(a) em formação</p>
-        <p className="opacity-90">Nível {lvl.id} – {lvl.name}</p>
+        <p className="opacity-90">Nível {lvl.id}: {lvl.name}</p>
       </div>
       <div className="mt-5 grid grid-cols-3 gap-3">
         {stats.map(({ icon: Icon, v, l, c }) => (

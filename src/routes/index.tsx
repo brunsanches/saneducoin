@@ -5,10 +5,12 @@ import { LEVELS } from "@/data/lessons";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "EduFin — Aprenda a investir jogando" },
+      { title: "Educoin: Aprenda a investir jogando" },
       { name: "description", content: "Saia das dívidas e chegue aos investimentos com aulas de 2 minutos, XP, ofensiva e simuladores. 100% brasileiro e grátis." },
-      { property: "og:title", content: "EduFin — Aprenda a investir jogando" },
+      { property: "og:title", content: "Educoin: Aprenda a investir jogando" },
       { property: "og:description", content: "Das dívidas ao Tesouro Direto, FIIs e cripto em aulas curtas e gamificadas." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Landing,
@@ -26,10 +28,10 @@ function Landing() {
   return (
     <div className="mx-auto max-w-[480px]">
       <section className="bg-hero rounded-b-[2.5rem] px-6 pb-10 pt-8 text-brand-foreground">
-        <p className="text-lg font-black">EduFin</p>
+        <p className="text-lg font-black">Educoin</p>
         <h1 className="mt-8 text-4xl font-black leading-tight">Do vermelho ao investidor, jogando.</h1>
         <p className="mt-4 text-lg opacity-90">
-          Aulas de 2 minutos, quizzes e simuladores para você sair das dívidas e fazer o seu dinheiro trabalhar — em reais, com exemplos do Nubank, Caixa, B3 e Tesouro Nacional.
+          Aulas de 2 minutos, quizzes e simuladores para você sair das dívidas e fazer o seu dinheiro trabalhar: em reais, com exemplos do Nubank, Caixa, B3 e Tesouro Nacional.
         </p>
         <div className="mt-8"><Cta /></div>
         <p className="mt-3 text-center text-sm opacity-80">Sem cadastro. Comece em 5 segundos.</p>

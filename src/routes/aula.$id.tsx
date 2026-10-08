@@ -14,10 +14,10 @@ export const Route = createFileRoute("/aula/$id")({
     return { lesson };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Aula não encontrada — EduFin" }, { name: "robots", content: "noindex" }] };
-    const t = `${loaderData.lesson.title} — EduFin`;
+    if (!loaderData) return { meta: [{ title: "Aula não encontrada: Educoin" }, { name: "robots", content: "noindex" }] };
+    const t = `${loaderData.lesson.title}: Educoin`;
     const d = (loaderData.lesson.paragraphs[0] ?? "").replace(/\[\[|\]\]/g, "").slice(0, 155);
-    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }] };
+    return { meta: [{ title: t }, { name: "description", content: d }, { property: "og:title", content: t }, { property: "og:description", content: d }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] };
   },
   component: Dojo,
 });

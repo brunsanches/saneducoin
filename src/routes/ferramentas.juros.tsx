@@ -7,10 +7,12 @@ import { brl } from "@/lib/game";
 export const Route = createFileRoute("/ferramentas/juros")({
   head: () => ({
     meta: [
-      { title: "Simulador de juros compostos — EduFin" },
+      { title: "Simulador de juros compostos: Educoin" },
       { name: "description", content: "Calcule quanto seu dinheiro rende com aporte inicial, aportes mensais, taxa e tempo." },
-      { property: "og:title", content: "Simulador de juros compostos — EduFin" },
+      { property: "og:title", content: "Simulador de juros compostos: Educoin" },
       { property: "og:description", content: "Veja o efeito bola de neve dos juros compostos em reais." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Juros,

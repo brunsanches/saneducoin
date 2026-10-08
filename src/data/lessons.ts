@@ -28,7 +28,7 @@ export const LESSONS: Lesson[] = [
     title: "Como sair das dívidas",
     paragraphs: [
       "O primeiro passo é colocar todas as dívidas no papel: para quem você deve, quanto e qual o juro de cada uma. Sem esse mapa, fica impossível escolher por onde começar.",
-      "Ataque primeiro a dívida com o juro mais alto. Normalmente é o cartão de crédito ou o cheque especial — eles crescem muito mais rápido que qualquer outra conta.",
+      "Ataque primeiro a dívida com o juro mais alto. Normalmente é o cartão de crédito ou o cheque especial: eles crescem muito mais rápido que qualquer outra conta.",
       "Enquanto quita, pare de criar dívidas novas: deixe o cartão guardado e compre só no débito ou no PIX.",
     ],
     question: "Qual dívida você deve pagar primeiro?",
@@ -128,7 +128,7 @@ export const LESSONS: Lesson[] = [
     title: "Tesouro Direto: Selic, IPCA+ e Prefixado",
     paragraphs: [
       "No Tesouro Direto você empresta dinheiro para o governo federal, pelo site do Tesouro Nacional ou pela corretora. É o investimento mais seguro do país.",
-      "O Tesouro Selic acompanha a taxa [[Selic]] e tem [[liquidez]] diária — ótimo para a reserva. O IPCA+ paga a inflação mais um juro fixo, protegendo seu poder de compra no longo prazo.",
+      "O Tesouro Selic acompanha a taxa [[Selic]] e tem [[liquidez]] diária: ótimo para a reserva. O IPCA+ paga a inflação mais um juro fixo, protegendo seu poder de compra no longo prazo.",
       "O Prefixado trava uma taxa no dia da compra. Se você vender antes do vencimento, o preço pode oscilar ([[marcação a mercado]]).",
     ],
     question: "Qual título é o mais indicado para a reserva de emergência?",
