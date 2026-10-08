@@ -8,10 +8,12 @@ import { LEVELS } from "@/data/lessons";
 export const Route = createFileRoute("/app")({
   head: () => ({
     meta: [
-      { title: "Início — EduFin" },
+      { title: "Início: Educoin" },
       { name: "description", content: "Sua próxima missão, XP, nível e ofensiva de estudos financeiros." },
-      { property: "og:title", content: "Início — EduFin" },
+      { property: "og:title", content: "Início: Educoin" },
       { property: "og:description", content: "Continue sua jornada financeira gamificada." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Dashboard,
@@ -34,12 +36,12 @@ function Dashboard() {
     <AppShell>
       <section className="rounded-3xl bg-card p-5 shadow-card">
         <div className="flex items-center justify-between">
-          <p className="font-extrabold">{lvl.emoji} Nível {lvl.id} – {lvl.name}</p>
+          <p className="font-extrabold">{lvl.emoji} Nível {lvl.id}: {lvl.name}</p>
           <p className="text-sm font-bold text-muted-foreground">{prog.done}/{prog.total}</p>
         </div>
         <Progress value={prog.pct} className="mt-3 h-4 bg-muted [&>div]:bg-primary" />
         <p className="mt-2 text-sm text-muted-foreground">
-          {lvl.id < 5 ? `Faltam ${prog.total - prog.done} aulas para o Nível ${lvl.id + 1} – ${LEVELS[lvl.id]?.name}` : "Último nível da jornada!"}
+          {lvl.id < 5 ? `Faltam ${prog.total - prog.done} aulas para o Nível ${lvl.id + 1}: ${LEVELS[lvl.id]?.name}` : "Último nível da jornada!"}
         </p>
       </section>
 

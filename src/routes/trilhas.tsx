@@ -7,10 +7,12 @@ import { isUnlocked, nextLesson, useGame } from "@/lib/game";
 export const Route = createFileRoute("/trilhas")({
   head: () => ({
     meta: [
-      { title: "Trilha de aprendizado — EduFin" },
+      { title: "Trilha de aprendizado: Educoin" },
       { name: "description", content: "O mapa da sua jornada financeira: 5 níveis, da sobrevivência ao mestre do capital." },
-      { property: "og:title", content: "Trilha de aprendizado — EduFin" },
+      { property: "og:title", content: "Trilha de aprendizado: Educoin" },
       { property: "og:description", content: "Avance pelos 5 níveis da jornada financeira." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Trilhas,

@@ -111,7 +111,7 @@ export type Badge = { id: string; name: string; desc: string; emoji: string; ear
 export const BADGES: Badge[] = [
   { id: "primeira", name: "Primeiro Passo", desc: "Concluiu a primeira aula", emoji: "👣", earned: (s) => s.completed.length >= 1 },
   { id: "mao-de-vaca", name: "Mão de Vaca Nível 1", desc: "Aprendeu a montar o orçamento 50/30/20", emoji: "🐄", earned: (s) => s.completed.includes("orcamento") },
-  { id: "livre", name: "Nome Limpo", desc: "Completou o Nível 1 – Sobrevivência", emoji: "🧼", earned: (s) => lvlDone(s, 1) },
+  { id: "livre", name: "Nome Limpo", desc: "Completou o Nível 1: Sobrevivência", emoji: "🧼", earned: (s) => lvlDone(s, 1) },
   { id: "cofrinho", name: "Cofrinho Blindado", desc: "Aprendeu sobre reserva de emergência", emoji: "🛡️", earned: (s) => s.completed.includes("reserva") },
   { id: "nubank", name: "Sócio do Nubank", desc: "Estudou seu primeiro CDB", emoji: "💜", earned: (s) => s.completed.includes("cdb") },
   { id: "imoveis", name: "Senhor dos Imóveis", desc: "Estudou seu primeiro FII", emoji: "🏢", earned: (s) => s.completed.includes("fiis") },

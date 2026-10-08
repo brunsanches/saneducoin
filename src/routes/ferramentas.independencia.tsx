@@ -8,10 +8,12 @@ import { brl } from "@/lib/game";
 export const Route = createFileRoute("/ferramentas/independencia")({
   head: () => ({
     meta: [
-      { title: "Calculadora de independência financeira — EduFin" },
+      { title: "Calculadora de independência financeira: Educoin" },
       { name: "description", content: "Descubra quanto patrimônio você precisa para viver de renda e em quanto tempo chega lá." },
-      { property: "og:title", content: "Calculadora de independência financeira — EduFin" },
+      { property: "og:title", content: "Calculadora de independência financeira: Educoin" },
       { property: "og:description", content: "Quanto falta para viver de renda?" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Independencia,

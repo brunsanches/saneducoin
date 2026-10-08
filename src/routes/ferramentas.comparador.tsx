@@ -8,10 +8,12 @@ import { brl } from "@/lib/game";
 export const Route = createFileRoute("/ferramentas/comparador")({
   head: () => ({
     meta: [
-      { title: "Comparador de renda fixa — EduFin" },
+      { title: "Comparador de renda fixa: Educoin" },
       { name: "description", content: "Compare Poupança, Tesouro Selic e CDB 100% do CDI, já descontando o Imposto de Renda." },
-      { property: "og:title", content: "Comparador de renda fixa — EduFin" },
+      { property: "og:title", content: "Comparador de renda fixa: Educoin" },
       { property: "og:description", content: "Poupança x Tesouro Selic x CDB 100% CDI." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Comparador,

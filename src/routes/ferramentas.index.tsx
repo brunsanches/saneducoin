@@ -6,10 +6,12 @@ import { useGame } from "@/lib/game";
 export const Route = createFileRoute("/ferramentas/")({
   head: () => ({
     meta: [
-      { title: "Arsenal de ferramentas — EduFin" },
+      { title: "Arsenal de ferramentas: Educoin" },
       { name: "description", content: "Simuladores de juros compostos, renda fixa e independência financeira em reais." },
-      { property: "og:title", content: "Arsenal de ferramentas — EduFin" },
+      { property: "og:title", content: "Arsenal de ferramentas: Educoin" },
       { property: "og:description", content: "Simule o crescimento do seu dinheiro." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Ferramentas,

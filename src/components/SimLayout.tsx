@@ -38,11 +38,11 @@ export function Field({
 }: { label: string; value: number; display: string; min: number; max: number; step: number; onChange: (v: number) => void }) {
   return (
     <div className="rounded-2xl bg-card p-4 shadow-card">
-      <div className="mb-3 flex items-baseline justify-between">
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span className="font-bold text-muted-foreground">{label}</span>
         <span className="text-lg font-extrabold">{display}</span>
       </div>
-      <Slider value={[value]} min={min} max={max} step={step} onValueChange={(v) => onChange(v[0] ?? value)} className="py-2" />
+      <Slider aria-label={label} value={[value]} min={min} max={max} step={step} onValueChange={(v) => onChange(v[0] ?? value)} className="py-2" />
     </div>
   );
 }
