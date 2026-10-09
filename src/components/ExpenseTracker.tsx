@@ -86,6 +86,20 @@ export function ExpenseTracker() {
         <p className="mt-2 text-sm font-bold text-muted-foreground" aria-live="polite">{validBudget ? percentage > 100 ? `${brl(total - budget)} acima do limite` : `${brl(budget - total)} disponíveis • ${Math.round(percentage)}% utilizado` : "Informe um limite maior que zero."}</p>
         <label htmlFor="monthly-limit" className="mt-4 block text-sm font-bold">Limite do mês (R$)</label>
         <Input id="monthly-limit" inputMode="decimal" value={limit} onChange={(event) => setLimit(event.target.value)} className="mt-1 h-12 text-base" />
+        <div className="mt-4">
+          {confirmReset ? (
+            <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-3">
+              <p className="text-sm font-bold">Isso apaga todos os gastos do mês.</p>
+              <div className="mt-3 flex gap-2">
+                <Button type="button" variant="destructive" onClick={resetMonth} className="h-12 flex-1 font-extrabold"><RotateCcw />Zerar tudo</Button>
+                <Button type="button" variant="outline" onClick={() => setConfirmReset(false)} className="h-12 flex-1 font-bold">Cancelar</Button>
+              </div>
+            </div>
+          ) : (
+            <Button type="button" variant="outline" onClick={() => { setConfirmReset(true); setResetNotice(""); }} className="h-12 w-full font-bold"><RotateCcw />Zerar gasto do mês</Button>
+          )}
+          {resetNotice && <p role="status" className="mt-2 text-sm font-bold text-primary-deep">{resetNotice}</p>}
+        </div>
       </section>
 
       <section aria-labelledby="category-title">
@@ -96,7 +110,7 @@ export function ExpenseTracker() {
           </ResponsiveContainer>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"><span className="text-2xl font-black">{expenses.length}</span><span className="text-sm text-muted-foreground">gastos no mês</span></div>
         </div>
-        <ul className="mt-2 space-y-3">{chartData.map(({ name, value: amount, icon: Icon, dot }) => <li key={name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2"><div className="flex min-w-0 items-center gap-2"><span className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} /><Icon className="h-4 w-4 shrink-0 text-muted-foreground" /><span className="truncate font-bold">{name}</span></div><span className="text-sm font-bold">{brl(amount)} <span className="text-muted-foreground">({Math.round(amount / total * 100)}%)</span></span></li>)}</ul>
+        <ul className="mt-2 space-y-3">{chartData.map(({ name, value: amount, icon: Icon, dot }) => <li key={name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2"><div className="flex min-w-0 items-center gap-2"><span className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} /><Icon className="h-4 w-4 shrink-0 text-muted-foreground" /><span className="truncate font-bold">{name}</span></div><span className="text-sm font-bold">{brl(amount)} <span className="text-muted-foreground">({total > 0 ? Math.round(amount / total * 100) : 0}%)</span></span></li>)}</ul>
       </section>
 
       <form onSubmit={addExpense} className="space-y-4 rounded-xl bg-card p-5 shadow-sm" noValidate>
