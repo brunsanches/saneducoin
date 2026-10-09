@@ -37,6 +37,6 @@ describe("Expense tracker", () => {
     expect(screen.getByTestId("expense-total").textContent).toContain("0,00");
     expect(screen.getByRole("progressbar").getAttribute("aria-valuenow")).toBe("0");
     expect(screen.getByText("Nenhum gasto registrado. Use o formulário acima para começar de novo.")).toBeTruthy();
-    expect(screen.getByRole("status").textContent).toContain("Mês zerado");
+    expect(screen.getByText("Mês zerado. O gasto total voltou para R$ 0,00.")).toBeTruthy();
   });
 });
