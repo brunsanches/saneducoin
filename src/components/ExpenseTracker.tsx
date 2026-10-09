@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { Bike, Check, Clapperboard, Plus, Sparkles, Utensils, Wallet } from "lucide-react";
+import { Bike, Check, Clapperboard, Plus, RotateCcw, Sparkles, Utensils, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -29,6 +29,8 @@ export function ExpenseTracker() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [accepted, setAccepted] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetNotice, setResetNotice] = useState("");
   const total = expenses.reduce((sum, expense) => sum + expense.value, 0);
   const budget = Number(limit.replace(",", "."));
   const validBudget = Number.isFinite(budget) && budget > 0;
@@ -57,6 +59,17 @@ export function ExpenseTracker() {
     setDescription("");
     setError("");
     setNotice(`Gasto de ${brl(rounded)} adicionado.`);
+    setResetNotice("");
+  }
+
+  function resetMonth() {
+    setExpenses([]);
+    setValue("");
+    setDescription("");
+    setError("");
+    setNotice("");
+    setConfirmReset(false);
+    setResetNotice("Mês zerado. O gasto total voltou para R$ 0,00.");
   }
 
   return (
@@ -73,6 +86,20 @@ export function ExpenseTracker() {
         <p className="mt-2 text-sm font-bold text-muted-foreground" aria-live="polite">{validBudget ? percentage > 100 ? `${brl(total - budget)} acima do limite` : `${brl(budget - total)} disponíveis • ${Math.round(percentage)}% utilizado` : "Informe um limite maior que zero."}</p>
         <label htmlFor="monthly-limit" className="mt-4 block text-sm font-bold">Limite do mês (R$)</label>
         <Input id="monthly-limit" inputMode="decimal" value={limit} onChange={(event) => setLimit(event.target.value)} className="mt-1 h-12 text-base" />
+        <div className="mt-4">
+          {confirmReset ? (
+            <div className="rounded-xl border border-destructive/30 bg-destructive/5 p-3">
+              <p className="text-sm font-bold">Isso apaga todos os gastos do mês.</p>
+              <div className="mt-3 flex gap-2">
+                <Button type="button" variant="destructive" onClick={resetMonth} className="h-12 flex-1 font-extrabold"><RotateCcw />Zerar tudo</Button>
+                <Button type="button" variant="outline" onClick={() => setConfirmReset(false)} className="h-12 flex-1 font-bold">Cancelar</Button>
+              </div>
+            </div>
+          ) : (
+            <Button type="button" variant="outline" onClick={() => { setConfirmReset(true); setResetNotice(""); }} className="h-12 w-full font-bold"><RotateCcw />Zerar gasto do mês</Button>
+          )}
+          {resetNotice && <p role="status" className="mt-2 text-sm font-bold text-primary-deep">{resetNotice}</p>}
+        </div>
       </section>
 
       <section aria-labelledby="category-title">
@@ -83,7 +110,7 @@ export function ExpenseTracker() {
           </ResponsiveContainer>
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"><span className="text-2xl font-black">{expenses.length}</span><span className="text-sm text-muted-foreground">gastos no mês</span></div>
         </div>
-        <ul className="mt-2 space-y-3">{chartData.map(({ name, value: amount, icon: Icon, dot }) => <li key={name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2"><div className="flex min-w-0 items-center gap-2"><span className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} /><Icon className="h-4 w-4 shrink-0 text-muted-foreground" /><span className="truncate font-bold">{name}</span></div><span className="text-sm font-bold">{brl(amount)} <span className="text-muted-foreground">({Math.round(amount / total * 100)}%)</span></span></li>)}</ul>
+        <ul className="mt-2 space-y-3">{chartData.map(({ name, value: amount, icon: Icon, dot }) => <li key={name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2"><div className="flex min-w-0 items-center gap-2"><span className={`h-2.5 w-2.5 shrink-0 rounded-full ${dot}`} /><Icon className="h-4 w-4 shrink-0 text-muted-foreground" /><span className="truncate font-bold">{name}</span></div><span className="text-sm font-bold">{brl(amount)} <span className="text-muted-foreground">({total > 0 ? Math.round(amount / total * 100) : 0}%)</span></span></li>)}</ul>
       </section>
 
       <form onSubmit={addExpense} className="space-y-4 rounded-xl bg-card p-5 shadow-sm" noValidate>
@@ -102,7 +129,7 @@ export function ExpenseTracker() {
         <Button variant="outline" className="mt-4 h-14 w-full font-extrabold" onClick={() => setAccepted(true)} disabled={accepted}>{accepted ? <Check /> : <Sparkles />}{accepted ? "Desafio aceito" : "Aceitar Desafio"}</Button>
         {accepted && <p role="status" className="mt-3 text-sm font-bold text-accent-foreground">Seu desafio: pedir delivery apenas uma vez a cada 15 dias.</p>}
       </section>
-      <section aria-label="Gastos registrados"><h2 className="text-xl font-extrabold">Gastos do mês</h2><ul className="mt-3 divide-y">{[...expenses].reverse().map((expense) => <li key={expense.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3"><div className="min-w-0"><p className="break-words font-bold">{expense.description}</p><p className="text-sm text-muted-foreground">{expense.category}</p></div><span className="font-extrabold">{brl(expense.value)}</span></li>)}</ul></section>
+      <section aria-label="Gastos registrados"><h2 className="text-xl font-extrabold">Gastos do mês</h2>{expenses.length === 0 ? <p className="mt-3 rounded-xl bg-muted p-4 text-sm font-bold text-muted-foreground">Nenhum gasto registrado. Use o formulário acima para começar de novo.</p> : <ul className="mt-3 divide-y">{[...expenses].reverse().map((expense) => <li key={expense.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3"><div className="min-w-0"><p className="break-words font-bold">{expense.description}</p><p className="text-sm text-muted-foreground">{expense.category}</p></div><span className="font-extrabold">{brl(expense.value)}</span></li>)}</ul>}</section>
     </div>
   );
 }
