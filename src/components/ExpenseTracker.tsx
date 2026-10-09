@@ -129,7 +129,7 @@ export function ExpenseTracker() {
         <Button variant="outline" className="mt-4 h-14 w-full font-extrabold" onClick={() => setAccepted(true)} disabled={accepted}>{accepted ? <Check /> : <Sparkles />}{accepted ? "Desafio aceito" : "Aceitar Desafio"}</Button>
         {accepted && <p role="status" className="mt-3 text-sm font-bold text-accent-foreground">Seu desafio: pedir delivery apenas uma vez a cada 15 dias.</p>}
       </section>
-      <section aria-label="Gastos registrados"><h2 className="text-xl font-extrabold">Gastos do mês</h2><ul className="mt-3 divide-y">{[...expenses].reverse().map((expense) => <li key={expense.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3"><div className="min-w-0"><p className="break-words font-bold">{expense.description}</p><p className="text-sm text-muted-foreground">{expense.category}</p></div><span className="font-extrabold">{brl(expense.value)}</span></li>)}</ul></section>
+      <section aria-label="Gastos registrados"><h2 className="text-xl font-extrabold">Gastos do mês</h2>{expenses.length === 0 ? <p className="mt-3 rounded-xl bg-muted p-4 text-sm font-bold text-muted-foreground">Nenhum gasto registrado. Use o formulário acima para começar de novo.</p> : <ul className="mt-3 divide-y">{[...expenses].reverse().map((expense) => <li key={expense.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 py-3"><div className="min-w-0"><p className="break-words font-bold">{expense.description}</p><p className="text-sm text-muted-foreground">{expense.category}</p></div><span className="font-extrabold">{brl(expense.value)}</span></li>)}</ul>}</section>
     </div>
   );
 }

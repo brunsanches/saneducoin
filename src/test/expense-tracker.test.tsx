@@ -26,4 +26,17 @@ describe("Expense tracker", () => {
     fireEvent.click(screen.getByRole("button", { name: "Aceitar Desafio" }));
     expect(screen.getByRole("button", { name: "Desafio aceito" }).hasAttribute("disabled")).toBe(true);
   });
+  it("resets the month total after confirming", () => {
+    render(<ExpenseTracker />);
+    fireEvent.click(screen.getByRole("button", { name: "Zerar gasto do mês" }));
+    expect(screen.getByText("Isso apaga todos os gastos do mês.")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
+    expect(screen.getByTestId("expense-total").textContent).toContain("850,00");
+    fireEvent.click(screen.getByRole("button", { name: "Zerar gasto do mês" }));
+    fireEvent.click(screen.getByRole("button", { name: "Zerar tudo" }));
+    expect(screen.getByTestId("expense-total").textContent).toContain("0,00");
+    expect(screen.getByRole("progressbar").getAttribute("aria-valuenow")).toBe("0");
+    expect(screen.getByText("Nenhum gasto registrado. Use o formulário acima para começar de novo.")).toBeTruthy();
+    expect(screen.getByRole("status").textContent).toContain("Mês zerado");
+  });
 });
