@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
-import { Bike, Check, Clapperboard, Plus, Sparkles, Utensils, Wallet } from "lucide-react";
+import { Bike, Check, Clapperboard, Plus, RotateCcw, Sparkles, Utensils, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
