@@ -46,6 +46,9 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
   --color-chart-6: var(--chart-6);
+  --color-budget-safe: var(--budget-safe);
+  --color-budget-warning: var(--budget-warning);
+  --color-budget-exceeded: var(--budget-exceeded);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -90,6 +93,9 @@
   --chart-4: oklch(0.6 0.15 240);
   --chart-5: oklch(0.83 0.16 85);
   --chart-6: oklch(0.6 0.2 15);
+  --budget-safe: oklch(0.696 0.17 162.48);
+  --budget-warning: oklch(0.828 0.189 84.429);
+  --budget-exceeded: oklch(0.645 0.246 16.439);
   --gradient-hero: linear-gradient(150deg, var(--brand), oklch(0.45 0.2 265) 55%, var(--primary-deep));
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-deep));
   --shadow-pop: 0 6px 0 0 var(--primary-deep);

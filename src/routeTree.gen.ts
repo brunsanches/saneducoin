@@ -18,6 +18,7 @@ import { Route as FerramentasIndexRouteImport } from './routes/ferramentas.index
 import { Route as FerramentasComparadorRouteImport } from './routes/ferramentas.comparador'
 import { Route as FerramentasIndependenciaRouteImport } from './routes/ferramentas.independencia'
 import { Route as FerramentasJurosRouteImport } from './routes/ferramentas.juros'
+import { Route as FerramentasRaioXRouteImport } from './routes/ferramentas.raio-x'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,6 +66,11 @@ const FerramentasJurosRoute = FerramentasJurosRouteImport.update({
   path: '/ferramentas/juros',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FerramentasRaioXRoute = FerramentasRaioXRouteImport.update({
+  id: '/ferramentas/raio-x',
+  path: '/ferramentas/raio-x',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/ferramentas/comparador': typeof FerramentasComparadorRoute
   '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
   '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas/raio-x': typeof FerramentasRaioXRoute
   '/ferramentas/': typeof FerramentasIndexRoute
 }
 export interface FileRoutesByTo {
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/ferramentas/comparador': typeof FerramentasComparadorRoute
   '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
   '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas/raio-x': typeof FerramentasRaioXRoute
   '/ferramentas': typeof FerramentasIndexRoute
 }
 export interface FileRoutesById {
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/ferramentas/comparador': typeof FerramentasComparadorRoute
   '/ferramentas/independencia': typeof FerramentasIndependenciaRoute
   '/ferramentas/juros': typeof FerramentasJurosRoute
+  '/ferramentas/raio-x': typeof FerramentasRaioXRoute
   '/ferramentas/': typeof FerramentasIndexRoute
 }
 export interface FileRouteTypes {
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/ferramentas/comparador'
     | '/ferramentas/independencia'
     | '/ferramentas/juros'
+    | '/ferramentas/raio-x'
     | '/ferramentas/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/ferramentas/comparador'
     | '/ferramentas/independencia'
     | '/ferramentas/juros'
+    | '/ferramentas/raio-x'
     | '/ferramentas'
   id:
     | '__root__'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/ferramentas/comparador'
     | '/ferramentas/independencia'
     | '/ferramentas/juros'
+    | '/ferramentas/raio-x'
     | '/ferramentas/'
   fileRoutesById: FileRoutesById
 }
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   FerramentasComparadorRoute: typeof FerramentasComparadorRoute
   FerramentasIndependenciaRoute: typeof FerramentasIndependenciaRoute
   FerramentasJurosRoute: typeof FerramentasJurosRoute
+  FerramentasRaioXRoute: typeof FerramentasRaioXRoute
   FerramentasIndexRoute: typeof FerramentasIndexRoute
 }
 
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FerramentasJurosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ferramentas/raio-x': {
+      id: '/ferramentas/raio-x'
+      path: '/ferramentas/raio-x'
+      fullPath: '/ferramentas/raio-x'
+      preLoaderRoute: typeof FerramentasRaioXRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   FerramentasComparadorRoute: FerramentasComparadorRoute,
   FerramentasIndependenciaRoute: FerramentasIndependenciaRoute,
   FerramentasJurosRoute: FerramentasJurosRoute,
+  FerramentasRaioXRoute: FerramentasRaioXRoute,
   FerramentasIndexRoute: FerramentasIndexRoute,
 }
 export const routeTree = rootRouteImport
