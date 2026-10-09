@@ -29,6 +29,8 @@ export function ExpenseTracker() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [accepted, setAccepted] = useState(false);
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetNotice, setResetNotice] = useState("");
   const total = expenses.reduce((sum, expense) => sum + expense.value, 0);
   const budget = Number(limit.replace(",", "."));
   const validBudget = Number.isFinite(budget) && budget > 0;
@@ -57,6 +59,17 @@ export function ExpenseTracker() {
     setDescription("");
     setError("");
     setNotice(`Gasto de ${brl(rounded)} adicionado.`);
+    setResetNotice("");
+  }
+
+  function resetMonth() {
+    setExpenses([]);
+    setValue("");
+    setDescription("");
+    setError("");
+    setNotice("");
+    setConfirmReset(false);
+    setResetNotice("Mês zerado. O gasto total voltou para R$ 0,00.");
   }
 
   return (
