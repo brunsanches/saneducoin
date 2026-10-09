@@ -18,6 +18,7 @@ export const Route = createFileRoute("/ferramentas/")({
 });
 
 const TOOLS = [
+  { id: "raio-x", to: "/ferramentas/raio-x", emoji: "👛", t: "Raio X Financeiro", d: "Seus gastos e seu limite do mês." },
   { id: "juros", to: "/ferramentas/juros", emoji: "📈", t: "Juros compostos", d: "Veja seu dinheiro crescer com aportes mensais." },
   { id: "comparador", to: "/ferramentas/comparador", emoji: "⚖️", t: "Comparador de renda fixa", d: "Poupança x Tesouro Selic x CDB 100% CDI." },
   { id: "independencia", to: "/ferramentas/independencia", emoji: "🏝️", t: "Independência financeira", d: "Quanto falta para viver de renda." },
