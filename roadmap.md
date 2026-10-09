@@ -1,5 +1,5 @@
 # Alterações Educoin
 
 - [x] Atualizar nome e remover hífens e travessões dos textos visíveis.
-- [x] Incluir ETF BOVA11, Ibovespa e S&P 500 no comparador com cenários educativos.
-- [x] Verificar cálculos, páginas e interação no comparador.
+- [x] Remover ETF BOVA11, Ibovespa e S&P 500 do comparador e restaurar a versão só de renda fixa.
+- [x] Verificar páginas, cálculos e testes após a restauração.
