@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Home, Map, Calculator, User, Flame } from "lucide-react";
+import { Home, Map, Calculator, User, Flame, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useEffect, type ReactNode } from "react";
 import { game, useGame, currentLevel } from "@/lib/game";
 
@@ -48,10 +49,13 @@ export function TopBar() {
         <p className="text-xs font-bold text-muted-foreground">Nível {lvl.id}</p>
         <p className="truncate font-extrabold leading-tight">{lvl.name}</p>
       </div>
-      <div className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 font-extrabold text-secondary-foreground">
+      <Button asChild variant="ghost" size="icon" className="h-10 w-10 shrink-0 text-brand">
+        <Link to="/comunidade" aria-label="Comunidade e Desafios" title="Comunidade e Desafios"><Users className="size-5" /></Link>
+      </Button>
+      <div className="flex items-center gap-1 rounded-full bg-secondary px-2 py-1.5 font-extrabold text-secondary-foreground">
         ⚡ {s.xp}
       </div>
-      <div className="flex items-center gap-1 rounded-full bg-muted px-3 py-1.5 font-extrabold text-streak">
+      <div className="flex items-center gap-1 rounded-full bg-muted px-2 py-1.5 font-extrabold text-streak">
         <Flame className="h-5 w-5 fill-current" /> {s.streak}
       </div>
     </header>

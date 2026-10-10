@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as ComunidadeRouteImport } from './routes/comunidade'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as TrilhasRouteImport } from './routes/trilhas'
 import { Route as AulaIdRouteImport } from './routes/aula.$id'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComunidadeRoute = ComunidadeRouteImport.update({
+  id: '/comunidade',
+  path: '/comunidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PerfilRoute = PerfilRouteImport.update({
@@ -75,6 +81,7 @@ const FerramentasRaioXRoute = FerramentasRaioXRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRoute
+  '/comunidade': typeof ComunidadeRoute
   '/perfil': typeof PerfilRoute
   '/trilhas': typeof TrilhasRoute
   '/aula/$id': typeof AulaIdRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app': typeof AppRoute
+  '/comunidade': typeof ComunidadeRoute
   '/perfil': typeof PerfilRoute
   '/trilhas': typeof TrilhasRoute
   '/aula/$id': typeof AulaIdRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRoute
+  '/comunidade': typeof ComunidadeRoute
   '/perfil': typeof PerfilRoute
   '/trilhas': typeof TrilhasRoute
   '/aula/$id': typeof AulaIdRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/comunidade'
     | '/perfil'
     | '/trilhas'
     | '/aula/$id'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/app'
+    | '/comunidade'
     | '/perfil'
     | '/trilhas'
     | '/aula/$id'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/app'
+    | '/comunidade'
     | '/perfil'
     | '/trilhas'
     | '/aula/$id'
@@ -151,6 +163,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRoute
+  ComunidadeRoute: typeof ComunidadeRoute
   PerfilRoute: typeof PerfilRoute
   TrilhasRoute: typeof TrilhasRoute
   AulaIdRoute: typeof AulaIdRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comunidade': {
+      id: '/comunidade'
+      path: '/comunidade'
+      fullPath: '/comunidade'
+      preLoaderRoute: typeof ComunidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/perfil': {
@@ -239,6 +259,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRoute,
+  ComunidadeRoute: ComunidadeRoute,
   PerfilRoute: PerfilRoute,
   TrilhasRoute: TrilhasRoute,
   AulaIdRoute: AulaIdRoute,
