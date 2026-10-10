@@ -1,12 +1,15 @@
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Check, Crown, Heart, MessageCircle, Plus, Send, Trophy, Users, X } from "lucide-react";
+import { ArrowRight, Check, Crown, Heart, Link, MessageCircle, MoreVertical, Plus, Search, Send, Trophy, Users, UserPlus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 type Post = { id: number; name: string; initials: string; time: string; text: string; tag: "Dúvida" | "Conquista" | "Dica"; likes: number; liked: boolean; comments: string[] };
 type Friend = { name: string; initials: string; saved: number; self?: boolean };
+type SuggestedFriend = { id: number; name: string; username: string; initials: string };
 type Challenge = { id: number; title: string; goal: number; friends: Friend[] };
 const INITIAL_POSTS: Post[] = [
   { id: 1, name: "Mariana Costa", initials: "MC", time: "Há 20 min", text: "Consegui guardar meus primeiros R$ 500! Troquei o delivery por comida feita em casa e já senti a diferença. Um passo de cada vez 💚", tag: "Conquista", likes: 24, liked: false, comments: ["Que conquista boa! Parabéns, Mariana 👏", "Também estou nessa meta!"] },
