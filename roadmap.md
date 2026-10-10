@@ -5,3 +5,5 @@
 - [x] Verificar páginas, cálculos e testes após a restauração.
 - [x] Criar Raio X Financeiro com resumo, categorias, formulário e desafio.
 - [x] Integrar em Ferramentas e verificar adição de gasto e telas.
+- [ ] Criar Comunidade e Desafios com fórum e ranking ilustrativos.
+- [ ] Verificar publicação, curtidas, comentários e criação de desafio.

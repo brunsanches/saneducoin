@@ -15,3 +15,4 @@
 - App screens wrap in `AppShell` (mobile column + bottom nav). Why: consistent mobile-first chrome.
 - Keep the existing game storage key across app name changes. Why: preserve progress saved on the device.
 - The expense tracker uses component-local React state initialized with illustrative expenses, not the game store. Why: this tool is a mock-data experience without persistence or XP changes.
+- Community posts, comments and friend challenges use component-local React state with illustrative data, separate from the game store. Why: the community is a requested mock experience without shared accounts, persistence or XP rewards.
