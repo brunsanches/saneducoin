@@ -36,12 +36,12 @@ describe("Community and challenges", () => {
     render(<CommunityChallenges />);
     fireEvent.click(screen.getByRole("tab", { name: "Meus Desafios" }));
     fireEvent.click(screen.getByRole("button", { name: "Criar Desafio com Amigos" }));
-    fireEvent.click(screen.getByRole("button", { name: "Criar desafio", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: "Criar desafio" }));
     expect(screen.getByRole("alert")).toBeInTheDocument();
     fireEvent.change(screen.getByLabelText("Nome do desafio"), { target: { value: "Reserva de emergência" } });
     fireEvent.change(screen.getByLabelText("Meta por pessoa (R$)"), { target: { value: "3000,50" } });
     fireEvent.change(screen.getByLabelText("Amigos (nomes separados por vírgula)"), { target: { value: "Ana, Bruno" } });
-    fireEvent.click(screen.getByRole("button", { name: "Criar desafio", exact: true }));
+    fireEvent.click(screen.getByRole("button", { name: "Criar desafio" }));
     expect(screen.getByText("Reserva de emergência")).toBeInTheDocument();
     expect(screen.getByText("Ana")).toBeInTheDocument();
     expect(screen.getByText("Bruno")).toBeInTheDocument();

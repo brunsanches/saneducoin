@@ -135,7 +135,7 @@ export function CommunityChallenges() {
                 const leader = index === 0 && friend.saved > 0;
                 return <li key={`${index}-${friend.name}`}>
                   <div className="flex items-center gap-2"><span className={`w-5 shrink-0 text-sm font-black ${leader ? "text-primary-deep" : "text-muted-foreground"}`}>{index + 1}º</span><Avatar initials={friend.initials} self={friend.self ?? false} /><div className="min-w-0 flex-1"><p className="flex items-center gap-1 font-extrabold"><span className="break-words">{friend.name}</span>{leader && <Crown aria-label="Primeiro lugar" className="h-4 w-4 shrink-0 text-gold" />}</p><p className="text-xs font-bold text-muted-foreground">{money(friend.saved)}</p></div><span className="shrink-0 text-sm font-black">{percent}%</span></div>
-                  <Progress value={percent} aria-label={`Progresso de ${friend.name}`} className={`mt-3 h-3 bg-muted motion-reduce:[&>div]:transition-none ${leader ? "[&>div]:bg-primary" : friend.self ? "[&>div]:bg-brand" : "[&>div]:bg-locked"}`} />
+                  <Progress value={percent} aria-valuenow={percent} aria-label={`Progresso de ${friend.name}`} className={`mt-3 h-3 bg-muted motion-reduce:[&>div]:transition-none ${leader ? "[&>div]:bg-primary" : friend.self ? "[&>div]:bg-brand" : "[&>div]:bg-locked"}`} />
                 </li>;
               })}</ol>
             </div>
