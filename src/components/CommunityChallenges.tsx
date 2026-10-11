@@ -50,6 +50,7 @@ export function CommunityChallenges() {
   const [search, setSearch] = useState("");
   const [addedFriends, setAddedFriends] = useState<number[]>([]);
   const [leavingChallenge, setLeavingChallenge] = useState<Challenge | null>(null);
+  const [menuFor, setMenuFor] = useState<number | null>(null);
 
   function publish(event: FormEvent) {
     event.preventDefault();
