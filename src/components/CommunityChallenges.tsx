@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Check, Crown, Heart, Link, MessageCircle, MoreVertical, Plus, Search, Send, Trophy, Users, UserPlus, X } from "lucide-react";
+import { ArrowRight, Check, Crown, Heart, Link, MessageCircle, MoreVertical, Plus, Search, Send, Trophy, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,6 +21,11 @@ const INITIAL_CHALLENGE: Challenge = { id: 1, title: "Viagem de Fim de Ano ✈�
   { name: "Você", initials: "VC", saved: 1100, self: true },
   { name: "Pedro", initials: "PS", saved: 700 },
 ] };
+const SUGGESTED_FRIENDS: SuggestedFriend[] = [
+  { id: 1, name: "Juliana Alves", username: "@juliana.alves", initials: "JA" },
+  { id: 2, name: "Rafael Souza", username: "@rafa.souza", initials: "RS" },
+  { id: 3, name: "Camila Ferreira", username: "@camila.f", initials: "CF" },
+];
 const money = (value: number) => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 const TAG_STYLES = { Dúvida: "bg-muted text-foreground", Conquista: "bg-secondary text-secondary-foreground", Dica: "bg-brand-soft text-brand" };
 
@@ -42,6 +47,10 @@ export function CommunityChallenges() {
   const [friendNames, setFriendNames] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [findingFriends, setFindingFriends] = useState(false);
+  const [search, setSearch] = useState("");
+  const [addedFriends, setAddedFriends] = useState<number[]>([]);
+  const [leavingChallenge, setLeavingChallenge] = useState<Challenge | null>(null);
 
   function publish(event: FormEvent) {
     event.preventDefault();
@@ -72,6 +81,18 @@ export function CommunityChallenges() {
     setTitle(""); setGoal(""); setFriendNames(""); setError("");
     setNotice("Desafio criado.");
   }
+
+  function leaveChallenge() {
+    if (!leavingChallenge) return;
+    setChallenges(previous => previous.filter(challenge => challenge.id !== leavingChallenge.id));
+    setLeavingChallenge(null);
+    setNotice("Você saiu do desafio.");
+  }
+
+  const query = search.trim().toLowerCase();
+  const visibleFriends = query
+    ? SUGGESTED_FRIENDS.filter(friend => friend.name.toLowerCase().includes(query) || friend.username.toLowerCase().includes(query))
+    : SUGGESTED_FRIENDS;
 
   return (
     <div className="mx-auto max-w-md space-y-5">
@@ -114,7 +135,10 @@ export function CommunityChallenges() {
           </div>}
         </article>)}
       </div> : <div id="challenges-panel" role="tabpanel" aria-labelledby="challenges-tab" className="space-y-5">
-        <Button onClick={() => { setCreating(!creating); setError(""); }} className="h-14 w-full whitespace-normal rounded-xl text-base font-extrabold"><Plus /> Criar Desafio com Amigos</Button>
+        <div className="grid gap-3">
+          <Button onClick={() => { setCreating(!creating); setError(""); }} className="h-14 w-full whitespace-normal rounded-xl text-base font-extrabold"><Plus /> Criar Desafio com Amigos</Button>
+          <Button onClick={() => { setFindingFriends(true); setSearch(""); }} variant="outline" className="h-14 w-full whitespace-normal rounded-xl text-base font-extrabold"><Users /> Encontrar Amigos</Button>
+        </div>
         {creating && <form onSubmit={createChallenge} className="space-y-3 rounded-xl border bg-card p-4 shadow-sm">
           <div className="flex items-center justify-between"><h2 className="font-black">Novo desafio</h2><Button type="button" variant="ghost" size="icon" aria-label="Cancelar criação" onClick={() => setCreating(false)}><X /></Button></div>
           <label className="block text-sm font-bold" htmlFor="challenge-title">Nome do desafio</label><Input id="challenge-title" value={title} onChange={event => setTitle(event.target.value)} maxLength={80} placeholder="Minha próxima conquista" />
@@ -126,9 +150,19 @@ export function CommunityChallenges() {
         {challenges.map(challenge => {
           const friends = [...challenge.friends].sort((a, b) => b.saved - a.saved);
           return <article key={challenge.id} className="overflow-hidden rounded-xl border bg-card shadow-sm">
-            <header className="border-b bg-secondary/50 p-5">
+            <header className="relative border-b bg-secondary/50 p-5">
+              <div className="absolute right-3 top-3">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" aria-label={`Opções do desafio ${challenge.title}`} className="h-10 w-10 rounded-lg text-muted-foreground"><MoreVertical /></Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="rounded-xl">
+                    <DropdownMenuItem onSelect={() => setLeavingChallenge(challenge)} className="gap-2 font-extrabold text-destructive focus:text-destructive"><X /> Sair do Desafio</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
               <span className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary-foreground"><span className="h-2 w-2 rounded-full bg-primary" /> Desafio ativo</span>
-              <h2 className="mt-2 break-words text-xl font-black">{challenge.title}</h2>
+              <h2 className="mt-2 break-words pr-10 text-xl font-black">{challenge.title}</h2>
               <p className="mt-2 text-sm text-muted-foreground">Meta por pessoa</p><p className="text-3xl font-black text-primary-deep">{money(challenge.goal)}</p>
               <div className="mt-3 flex items-center gap-1 text-sm font-bold text-secondary-foreground"><Users className="h-4 w-4" /> {friends.length} participantes</div>
             </header>
@@ -145,6 +179,50 @@ export function CommunityChallenges() {
           </article>;
         })}
       </div>}
+
+      <Dialog open={findingFriends} onOpenChange={setFindingFriends}>
+        <DialogContent className="max-w-md rounded-xl bg-card p-5 sm:rounded-xl">
+          <DialogHeader className="text-left">
+            <DialogTitle className="text-xl font-black">Encontrar Amigos</DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground">Busque pessoas da comunidade ou convide quem você já conhece.</DialogDescription>
+          </DialogHeader>
+          <div className="relative mt-1">
+            <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+            <Input value={search} onChange={event => setSearch(event.target.value)} maxLength={80} placeholder="Buscar por @usuario ou nome" aria-label="Buscar por @usuario ou nome" className="h-12 rounded-xl pl-11" />
+          </div>
+          <ul className="mt-4 max-h-64 space-y-3 overflow-y-auto" aria-label="Pessoas sugeridas">
+            {visibleFriends.map(friend => {
+              const added = addedFriends.includes(friend.id);
+              return <li key={friend.id} className="flex items-center gap-3 rounded-xl border bg-background p-3">
+                <Avatar initials={friend.initials} />
+                <div className="min-w-0 flex-1"><p className="break-words font-extrabold">{friend.name}</p><p className="break-words text-xs font-bold text-muted-foreground">{friend.username}</p></div>
+                <Button aria-pressed={added} onClick={() => setAddedFriends(previous => added ? previous.filter(id => id !== friend.id) : [...previous, friend.id])} className={`h-10 shrink-0 rounded-lg px-4 font-extrabold ${added ? "bg-primary text-primary-foreground" : ""}`} variant={added ? "default" : "outline"}>{added ? "Adicionado" : "Adicionar"}</Button>
+              </li>;
+            })}
+            {visibleFriends.length === 0 && <li className="rounded-xl bg-muted p-3 text-sm font-bold text-muted-foreground">Ninguém encontrado com esse nome.</li>}
+          </ul>
+          <div className="my-4 flex items-center gap-3" role="separator" aria-label="ou">
+            <span className="h-px flex-1 bg-border" />
+            <span className="text-xs font-black text-muted-foreground">OU</span>
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <Button onClick={() => setNotice("Convite copiado! Compartilhe com seus amigos e ganhe 50 XP.")} className="h-14 w-full whitespace-normal rounded-xl text-base font-extrabold"><Link /> Convidar via Link</Button>
+          <p className="mt-2 text-center text-sm font-bold text-muted-foreground">Convide amigos para o app e ganhe 50 XP</p>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={leavingChallenge !== null} onOpenChange={open => { if (!open) setLeavingChallenge(null); }}>
+        <DialogContent className="max-w-sm rounded-xl bg-card p-5 text-center sm:rounded-xl">
+          <DialogHeader className="items-center text-center">
+            <DialogTitle className="text-xl font-black">Sair do Desafio?</DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground">Tem certeza que deseja sair? Seu progresso atual nesta meta será perdido e seus amigos serão notificados.</DialogDescription>
+          </DialogHeader>
+          <div className="mt-4 grid gap-3">
+            <Button variant="outline" onClick={() => setLeavingChallenge(null)} className="h-12 rounded-xl font-extrabold">Cancelar</Button>
+            <Button variant="destructive" onClick={leaveChallenge} className="h-12 rounded-xl font-extrabold">Sim, Quero Sair</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
