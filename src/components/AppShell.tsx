@@ -3,6 +3,7 @@ import { Home, Map, Calculator, User, Flame, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, type ReactNode } from "react";
 import { game, useGame, currentLevel } from "@/lib/game";
+import { NavAssistant } from "@/components/NavAssistant";
 
 const NAV = [
   { to: "/app", label: "Home", icon: Home },
@@ -17,6 +18,7 @@ export function AppShell({ children, header = true }: { children: ReactNode; hea
     <div className="mx-auto flex min-h-screen max-w-[480px] flex-col bg-background">
       {header && <TopBar />}
       <main className="flex-1 px-4 pb-28 pt-4">{children}</main>
+      <NavAssistant />
       <nav className="fixed inset-x-0 bottom-0 z-40 mx-auto max-w-[480px] border-t bg-card/95 backdrop-blur">
         <ul className="grid grid-cols-4">
           {NAV.map(({ to, label, icon: Icon }) => (
