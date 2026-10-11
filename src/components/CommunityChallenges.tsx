@@ -152,14 +152,10 @@ export function CommunityChallenges() {
           return <article key={challenge.id} className="overflow-hidden rounded-xl border bg-card shadow-sm">
             <header className="relative border-b bg-secondary/50 p-5">
               <div className="absolute right-3 top-3">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" aria-label={`Opções do desafio ${challenge.title}`} className="h-10 w-10 rounded-lg text-muted-foreground"><MoreVertical /></Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="rounded-xl">
-                    <DropdownMenuItem onSelect={() => setLeavingChallenge(challenge)} className="gap-2 font-extrabold text-destructive focus:text-destructive"><X /> Sair do Desafio</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <Button variant="ghost" size="icon" aria-label={`Opções do desafio ${challenge.title}`} aria-expanded={menuFor === challenge.id} onClick={() => setMenuFor(previous => previous === challenge.id ? null : challenge.id)} className="h-10 w-10 rounded-lg text-muted-foreground"><MoreVertical /></Button>
+                {menuFor === challenge.id && <div role="menu" aria-label={`Opções do desafio ${challenge.title}`} className="absolute right-0 top-11 z-10 w-44 rounded-xl border bg-card p-1 shadow-sm">
+                  <button type="button" role="menuitem" onClick={() => { setMenuFor(null); setLeavingChallenge(challenge); }} className="flex h-11 w-full items-center gap-2 rounded-lg px-3 font-extrabold text-destructive hover:bg-destructive/10"><X /> Sair do Desafio</button>
+                </div>}
               </div>
               <span className="inline-flex items-center gap-1 text-xs font-extrabold text-secondary-foreground"><span className="h-2 w-2 rounded-full bg-primary" /> Desafio ativo</span>
               <h2 className="mt-2 break-words pr-10 text-xl font-black">{challenge.title}</h2>
