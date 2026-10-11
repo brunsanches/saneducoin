@@ -48,4 +48,38 @@ describe("Community and challenges", () => {
     expect(screen.getByText(/3.000,50/)).toBeInTheDocument();
     expect(screen.getAllByRole("progressbar").slice(0, 3).map(bar => bar.getAttribute("aria-valuenow"))).toEqual(["0", "0", "0"]);
   });
+  it("finds friends, adds them and shows the invite option", () => {
+    render(<CommunityChallenges />);
+    fireEvent.click(screen.getByRole("tab", { name: "Meus Desafios" }));
+    fireEvent.click(screen.getByRole("button", { name: "Encontrar Amigos" }));
+    expect(screen.getByLabelText("Buscar por @usuario ou nome")).toBeInTheDocument();
+    expect(screen.getByText("@juliana.alves")).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText("Buscar por @usuario ou nome"), { target: { value: "camila" } });
+    expect(screen.queryByText("@juliana.alves")).not.toBeInTheDocument();
+    expect(screen.getByText("@camila.f")).toBeInTheDocument();
+    const add = screen.getByRole("button", { name: "Adicionar" });
+    fireEvent.click(add);
+    expect(add).toHaveTextContent("Adicionado");
+    fireEvent.click(add);
+    expect(add).toHaveTextContent("Adicionar");
+    expect(screen.getByText("OU")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Convidar via Link" })).toBeInTheDocument();
+    expect(screen.getByText("Convide amigos para o app e ganhe 50 XP")).toBeInTheDocument();
+  });
+  it("leaves the active challenge after confirmation", () => {
+    render(<CommunityChallenges />);
+    fireEvent.click(screen.getByRole("tab", { name: "Meus Desafios" }));
+    expect(screen.getByText("Viagem de Fim de Ano ✈️")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Opções do desafio Viagem de Fim de Ano ✈️" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Sair do Desafio" }));
+    expect(screen.getByText("Sair do Desafio?")).toBeInTheDocument();
+    expect(screen.getByText(/Seu progresso atual nesta meta será perdido/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Cancelar" }));
+    expect(screen.getByText("Viagem de Fim de Ano ✈️")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Opções do desafio Viagem de Fim de Ano ✈️" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Sair do Desafio" }));
+    fireEvent.click(screen.getByRole("button", { name: "Sim, Quero Sair" }));
+    expect(screen.queryByText("Viagem de Fim de Ano ✈️")).not.toBeInTheDocument();
+    expect(screen.getByText("Você saiu do desafio.")).toBeInTheDocument();
+  });
 });
