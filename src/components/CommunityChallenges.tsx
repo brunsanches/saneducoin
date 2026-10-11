@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 type Post = { id: number; name: string; initials: string; time: string; text: string; tag: "Dúvida" | "Conquista" | "Dica"; likes: number; liked: boolean; comments: string[] };
 type Friend = { name: string; initials: string; saved: number; self?: boolean };
