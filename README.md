@@ -54,7 +54,7 @@ Caso deseje clonar e rodar este repositório em sua máquina local, certifique-s
 
 ```bash
 # 1. Clone este repositório
-git clone [https://github.com/SEU-USUARIO/saneducoin.git](https://github.com/SEU-USUARIO/saneducoin.git)
+git clone [https://github.com/SEU-USUARIO/saneducoin.git](https://github.com/brunsanches/saneducoin.git)
 
 # 2. Acesse a pasta do projeto
 cd saneducoin
