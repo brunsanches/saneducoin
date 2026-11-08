@@ -14,7 +14,7 @@
 
 O **Saneducoin** nasceu de uma dor real vivenciada na prática aos 16 anos, ao iniciar a jornada de investimentos no mercado de capitais e notar a carência de materiais didáticos, acessíveis e livres de jargões excludentes ("economês") para jovens investidores.
 
-A concepção inicial foi estruturada e acelerada aos 18 anos por meio dos frameworks de execução e protagonismo do curso **Carreira de Excelência**, promovido pelo **Na Prática (Fundação Estudar)** — iniciativa impulsionada pela visão de educação e filantropia do **BTG Pactual** — e sediado na **Saint Paul Escola de Negócios**.
+A concepção inicial foi estruturada e acelerada aos 18 anos por meio dos frameworks de execução e protagonismo do curso **Carreira de Excelência**, promovido pelo **Na Prática (Fundação Estudar)** — iniciativa impulsionada pela visão de educação e filantropia do **BTG Pactual** — e sediado na **Saint Paul Escola de Negócios**, reconhecida entre as melhores do mundo.
 
 ---
 
